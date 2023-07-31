@@ -3,7 +3,10 @@ const { ipcRenderer, contextBridge } = require("electron");
 const api = {
     copyFile: (fileParams) => {
         ipcRenderer.invoke("copy-file", fileParams);
-    }
+    },
+    getFilesInFolder: () => {return ipcRenderer.invoke("get-files-in-folder")},
+    startDrag: (fileName => { ipcRenderer.invoke("on-drag-start", fileName)})    
+
 }
 
 window.addEventListener('DOMContentLoaded', () => {

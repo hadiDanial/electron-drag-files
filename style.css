@@ -8,3 +8,7 @@
     background-color: aquamarine;
     margin: auto;
 }
+
+.unselectable{
+    user-select: none;
+}
