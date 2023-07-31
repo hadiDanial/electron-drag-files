@@ -3,10 +3,10 @@ const path = require('path')
 const fs = require('fs');
 const https = require('https')
 
-const copiedFilesDir = path.join(__dirname, '//copied-files//');
-if(!fs.existsSync(copiedFilesDir))
-    fs.mkdirSync(copiedFilesDir);
-    
+const fileCopyDestination = path.join(__dirname, '//copied-files//');
+if(!fs.existsSync(fileCopyDestination))
+    fs.mkdirSync(fileCopyDestination);
+
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 1000,
@@ -40,14 +40,14 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle("copy-file", async (_, fileParams) => {
     const fileToCopy = fileParams.fileToCopy;
-    const copiedFilePath = fileParams.copiedFilePath;
+    const fileName = fileParams.fileName;
 
-    fs.copyFileSync(fileToCopy, copiedFilesDir + copiedFilePath);
+    fs.copyFileSync(fileToCopy, fileCopyDestination + fileName);
 })
 
 ipcMain.handle("get-files-in-folder", async (_) => {
     let fileNames = []
-    await fs.promises.readdir(copiedFilesDir).then((files) => {
+    await fs.promises.readdir(fileCopyDestination).then((files) => {
         files.forEach(function (file) {
             fileNames.push(file);
         });
@@ -59,7 +59,7 @@ ipcMain.handle("get-files-in-folder", async (_) => {
 
 ipcMain.handle("on-drag-start", async (event, fileName) => {
     event.sender.startDrag({
-        file: copiedFilesDir + fileName,      
+        file: fileCopyDestination + fileName,      
         icon: iconName  
     })
 })

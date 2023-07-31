@@ -17,7 +17,7 @@ fileContainer.addEventListener("drop", async (event) => {
     for (const file of files)
     {
         filesList.innerHTML += file.name + "<br>";
-        await window.api.copyFile({fileToCopy:file.path, copiedFilePath:file.name });
+        await window.api.copyFile({fileToCopy:file.path, fileName:file.name });
     }
     await updateFilesList();
 })
