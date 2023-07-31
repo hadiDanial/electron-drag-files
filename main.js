@@ -4,7 +4,9 @@ const fs = require('fs');
 const https = require('https')
 
 const copiedFilesDir = path.join(__dirname, '//copied-files//');
-
+if(!fs.existsSync(copiedFilesDir))
+    fs.mkdirSync(copiedFilesDir);
+    
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 1000,
