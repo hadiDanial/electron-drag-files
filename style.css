@@ -1,0 +1,10 @@
+.file-container
+{
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+    text-align: center;    
+    border-color: brown;
+    background-color: aquamarine;
+    margin: auto;
+}
